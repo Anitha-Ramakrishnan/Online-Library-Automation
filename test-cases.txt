@@ -1,0 +1,133 @@
+Online Library System Test Cases
+================================
+
+Preconditions:
+- Node.js is installed.
+- Dependencies installed with `npm install`.
+- Application is started with `npm start` or `cmd /c "set PORT=3001&& npm start"` if port 3000 is occupied.
+- Open browser to http://localhost:3000 (or http://localhost:3001 if using alternate port).
+
+Test Case 1: Login Success
+--------------------------
+Steps:
+1. Navigate to /login.
+2. Enter Username: user1.
+3. Enter Password: password1.
+4. Click Login.
+Expected Result:
+- User is redirected to /library.
+- The page shows a welcome banner and the list of available books.
+
+Test Case 2: Login Failure
+--------------------------
+Steps:
+1. Navigate to /login.
+2. Enter Username: user1.
+3. Enter Password: wrongpassword.
+4. Click Login.
+Expected Result:
+- Login page displays error "Invalid username or password".
+- User remains on /login.
+
+Test Case 3: Forgot Password (Demo Reset)
+-----------------------------------------
+Steps:
+1. On login page, click "Forgot password?".
+2. Enter Username: user1.
+3. Enter Email: user1@example.com.
+4. Click Reset Password.
+Expected Result:
+- The page displays confirmation message that password was reset to reset123.
+- User can log in using password reset123 afterwards.
+
+Test Case 4: Browse Catalog
+---------------------------
+Steps:
+1. Log in successfully.
+2. On /library, verify that book cards display title, author, price, quantity input, and Add to cart button.
+Expected Result:
+- All sample books appear.
+- Each book can be added to the cart.
+
+Test Case 5: Add Single Item to Cart
+------------------------------------
+Steps:
+1. On /library, set quantity to 1 for a book.
+2. Click Add to cart.
+3. Navigate to /cart.
+Expected Result:
+- The selected book appears in the cart.
+- Quantity shows 1.
+- Total reflects the price of the item.
+
+Test Case 6: Add Multiple Quantity to Cart
+------------------------------------------
+Steps:
+1. On /library, set quantity to 3 for a book.
+2. Click Add to cart.
+3. Navigate to /cart.
+Expected Result:
+- The selected book appears in the cart with quantity 3.
+- Total equals price * 3.
+
+Test Case 7: Update Cart Quantity
+---------------------------------
+Steps:
+1. On /cart, locate an item.
+2. Change its quantity value to 2.
+3. Click Update.
+Expected Result:
+- The item quantity updates to 2.
+- The cart total recalculates correctly.
+
+Test Case 8: Remove Item from Cart
+----------------------------------
+Steps:
+1. On /cart, click Remove for an item.
+Expected Result:
+- The item disappears from the cart.
+- If the cart becomes empty, the empty cart message is shown.
+
+Test Case 9: Checkout Flow
+--------------------------
+Steps:
+1. Add one or more items to the cart.
+2. On /cart, fill in Full name and Shipping address.
+3. Click Checkout.
+Expected Result:
+- User is taken to an order success page.
+- Order summary displays item quantities, line totals, and total amount.
+- The cart is emptied after checkout.
+
+Test Case 10: Order History
+---------------------------
+Steps:
+1. Complete a checkout.
+2. Navigate to /orders.
+Expected Result:
+- The new order appears in the order history list.
+- Order details include item names, quantities, prices, and date.
+
+Test Case 11: Session and Logout
+--------------------------------
+Steps:
+1. Log in successfully.
+2. Click Logout.
+3. Attempt to navigate to /library or /cart.
+Expected Result:
+- User is redirected to /login.
+- Protected pages are not accessible without login.
+
+Test Case 12: Invalid Cart Behavior
+-----------------------------------
+Steps:
+1. Attempt to update a cart item with quantity 0 or negative in /cart.
+2. Click Update.
+Expected Result:
+- Quantity is sanitized to 1 if the system normalizes it.
+- The cart does not accept negative quantities.
+
+Notes:
+- The demo user credentials are stored in `data/library.json` after the first run.
+- The forgot password flow sets the password to `reset123` and requires a new login with that password.
+- If port 3000 is occupied, use port 3001.
