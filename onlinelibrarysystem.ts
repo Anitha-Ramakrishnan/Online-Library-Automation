@@ -38,7 +38,7 @@ test('Login Success', async ({ page }) => {
   //Call the login function to perform login steps
 await login(page);
  //Verify once logged in a welcome banner and the list of available books.
-  await page.getByText('Welcome, user1').click();
+await page.getByText('Welcome, user1').click();
 });
 
 test('Browse Catalog', async ({ page }) => {
@@ -120,8 +120,8 @@ await expect(page.getByRole('button', { name: 'Login' })).toBeVisible();
 
 test('Login Failure', async ({ page }) => {
   //Enter the web link and login with username and password
-  await page.goto('http://localhost:3000/login');
-  await page.locator('input[name="username"]').click();
+await page.goto('http://localhost:3000/login');
+await page.locator('input[name="username"]').click();
   //Fill the username and password fields and click on login button
 await page.locator('input[name="username"]').click();
 await page.locator('input[name="username"]').fill('user1');
@@ -134,23 +134,6 @@ await expect(page.locator('text=Invalid username or password')).toBeVisible();
 await expect(page).toHaveURL(/.*login/)
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 test('Forgot Password (Demo Reset)', async ({ page }) => {
 await page.goto('http://localhost:3000/login');
 await page.locator('input[name="username"]').click();
@@ -162,4 +145,3 @@ await page.locator('input[name="email"]').fill('user1@example.com');
 await page.getByRole('button', { name: 'Reset Password' }).click();
 await expect(page.locator('text=Password reset to "reset123" (demo). Please login.')).toBeVisible()
 });
-
